@@ -1,5 +1,5 @@
 import type { ActionFunction, LoaderFunction } from 'remix'
-import { Form, json, useLoaderData } from 'remix'
+import { json, useLoaderData } from 'remix'
 import { authenticator, supabaseStrategy } from '~/auth.server'
 import { LinkList } from '~/LinkList'
 
@@ -18,17 +18,11 @@ export const loader: LoaderFunction = async({ request }) => {
 }
 
 export default function Screen() {
-  const { email } = useLoaderData<LoaderData>()
+  useLoaderData<LoaderData>()
   return (
     <>
-      <h1>Hello {email}</h1>
-      <h2>Welcome in Private index</h2>
-
+      <h4>Private itemId details</h4>
       <LinkList />
-
-      <Form method="post">
-        <button>Log Out</button>
-      </Form>
     </>
   )
 }

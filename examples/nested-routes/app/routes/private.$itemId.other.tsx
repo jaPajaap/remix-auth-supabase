@@ -1,6 +1,7 @@
 import type { ActionFunction, LoaderFunction } from 'remix'
 import { json, useLoaderData } from 'remix'
 import { authenticator, supabaseStrategy } from '~/auth.server'
+import { LinkList } from '~/LinkList'
 
 type LoaderData = { email?: string }
 
@@ -10,17 +11,18 @@ export const action: ActionFunction = async({ request }) => {
 
 export const loader: LoaderFunction = async({ request }) => {
   const session = await supabaseStrategy.checkSession(request, {
-    failureRedirect: '/login?redirectTo=/private/profile',
+    failureRedirect: '/login',
   })
 
   return json<LoaderData>({ email: session.user?.email })
 }
 
 export default function Screen() {
-  const { email } = useLoaderData<LoaderData>()
+  useLoaderData<LoaderData>()
   return (
     <>
-      <h3>Welcome in Nested Private Profile { email }</h3>
+      <h4>Private itemId Other</h4>
+      <LinkList />
     </>
   )
 }

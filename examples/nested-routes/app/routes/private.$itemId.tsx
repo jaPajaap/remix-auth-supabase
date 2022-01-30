@@ -1,7 +1,7 @@
+import { Outlet } from '@remix-run/react'
 import type { ActionFunction, LoaderFunction } from 'remix'
-import { Form, json, useLoaderData } from 'remix'
+import { json, useLoaderData } from 'remix'
 import { authenticator, supabaseStrategy } from '~/auth.server'
-import { LinkList } from '~/LinkList'
 
 type LoaderData = { email?: string }
 
@@ -22,13 +22,10 @@ export default function Screen() {
   return (
     <>
       <h1>Hello {email}</h1>
-      <h2>Welcome in Private index</h2>
+      <h2>Welcome in Private itemId layout</h2>
 
-      <LinkList />
-
-      <Form method="post">
-        <button>Log Out</button>
-      </Form>
+      <h3>Outlet</h3>
+      <Outlet />
     </>
   )
 }
